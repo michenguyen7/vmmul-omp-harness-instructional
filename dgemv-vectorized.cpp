@@ -1,4 +1,4 @@
-const char* dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
+const char *dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
 
 /*
  * This routine performs a dgemv operation
@@ -6,19 +6,16 @@ const char* dgemv_desc = "Vectorized implementation of matrix-vector multiply.";
  * where A is n-by-n matrix stored in row-major format, and X and Y are n by 1 vectors.
  * On exit, A and X maintain their input values.
  */
-void my_dgemv(int n, double* A, double* x, double* y) {
+void my_dgemv(int n, double *A, double *x, double *y)
+{
    // insert your code here: implementation of vectorized vector-matrix multiply
- int sum = 0;
-   int k = 0;
-   for (int row = 0; row < n; row++)
+   for (int i = 0; i < n; ++i)
    {
-      if (x[row] > 0)
+      double temp = 0.0;
+      for (int j = 0; j < n; ++j)
       {
-         sum += x[row];
-         k++;
+         temp += A[i * n + j] * x[j];
       }
+      y[i] += temp;
    }
 }
-
-
-
